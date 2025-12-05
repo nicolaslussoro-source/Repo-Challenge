@@ -1,19 +1,21 @@
 import { Router, Request, Response } from 'express';
 import { authenticate } from '../middleware/auth';
-import { getUser, getAllUsers } from '../services/metricsService';
+import { getAllUsers, getUser } from '../services/metricsService';
 
 const router = Router();
 
-router.get('/:userId', authenticate, async (req: Request, res: Response) => {
-  const { userId } = req.params;
-  if (!userId) return res.status(400).json({ error: 'userId required' });
-  const metrics = await getUser(userId);
-  return res.json({ userId, metrics });
+router.get('/user/:email', authenticate, async (req: Request, res: Response) => {
+  const { email } = req.params;
+  if (!email) return res.status(400).json({ error: 'email required' });
+  const metrics = await getUser(email);
+  return res.status(200).json(metrics);
 });
 
 router.get('/admin', authenticate, async (req: Request, res: Response) => {
-  const all = await getAllUsers();
-  return res.json(all);
+  const users = await getAllUsers();
+  return res.status(200).json(users);
 });
+
+
 
 export default router;

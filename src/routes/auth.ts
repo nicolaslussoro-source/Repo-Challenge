@@ -31,13 +31,12 @@ router.post('/register', async (req: Request, res: Response) => {
   }
 });
 
-// Protected: returns current user info (no password hash)
 router.get('/me', authenticate, async (req: Request, res: Response) => {
   const userId = (req as any).user?.sub;
   if (!userId) return res.status(401).json({ error: 'unauthorized' });
   const user = await getById(userId);
   if (!user) return res.status(404).json({ error: 'user not found' });
-  return res.json(user);
+  return res.status(200).json(user);
 });
 
 export default router;
