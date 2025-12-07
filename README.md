@@ -10,7 +10,7 @@ npm run dev
 ```
 
 Database (MySQL) setup
-- Create a database named `backchallenge` (or set `DB_NAME` in `.env`).
+- Create a database named `challenge` (or set `DB_NAME` in `.env`).
 - Ensure `.env` contains DB credentials (see `.env.example`).
 - The server will create the `users` table on startup if it exists and credentials are valid.
 
