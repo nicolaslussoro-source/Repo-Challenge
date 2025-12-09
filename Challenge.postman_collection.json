@@ -1,0 +1,51 @@
+{
+	"info": {
+		"_postman_id": "0d6f2d16-8b1f-46fa-b525-5287897ae6c0",
+		"name": "Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50586829",
+		"_collection_link": "https://nicolas-lussoro-2033462.postman.co/workspace/Nicolas-Ezequiel-Lussoro's-Work~bf425111-becc-42e9-8c60-d78cd1d3962e/collection/50586829-0d6f2d16-8b1f-46fa-b525-5287897ae6c0?action=share&source=collection_link&creator=50586829"
+	},
+	"item": [
+		{
+			"name": "Registro",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Mis Datos",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un Usuario",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todos los Usuarios",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

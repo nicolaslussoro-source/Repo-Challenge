@@ -5,18 +5,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.init = init;
 const mariadb_1 = __importDefault(require("mariadb"));
-const dotenv_1 = __importDefault(require("dotenv"));
-dotenv_1.default.config();
+const env_1 = require("./config/env");
 const pool = mariadb_1.default.createPool({
-    host: process.env.DB_HOST || '127.0.0.1',
-    port: Number(process.env.DB_PORT || 3306),
-    user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD || 'nico1234',
-    database: process.env.DB_NAME || 'challenge',
+    host: env_1.envs.DB_HOST,
+    port: env_1.envs.DB_PORT,
+    user: env_1.envs.DB_USER,
+    password: env_1.envs.DB_PASSWORD,
+    database: env_1.envs.DB_NAME,
     connectionLimit: 10
 });
 async function init() {
-    // Create users table if not exists
     const createUsersTable = `
     CREATE TABLE IF NOT EXISTS users (
       id VARCHAR(36) PRIMARY KEY,

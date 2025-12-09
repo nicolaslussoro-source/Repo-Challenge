@@ -12,7 +12,7 @@ const pool = mariadb.createPool({
 });
 
 export async function init() {
-  // Create users table if not exists
+  
   const createUsersTable = `
     CREATE TABLE IF NOT EXISTS users (
       id VARCHAR(36) PRIMARY KEY,

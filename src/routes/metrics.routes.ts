@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express';
 import { authenticate } from '../middleware/auth';
-import { getAllUsers, getUser } from '../services/metricsService';
+import { getUsers, getUser } from '../services/metrics.service';
 
 const router = Router();
 
@@ -12,7 +12,7 @@ router.get('/user/:email', authenticate, async (req: Request, res: Response) => 
 });
 
 router.get('/admin', authenticate, async (req: Request, res: Response) => {
-  const users = await getAllUsers();
+  const users = await getUsers();
   return res.status(200).json(users);
 });
 

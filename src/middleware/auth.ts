@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
+import { envs } from '../config/env';
 
 
 export function authenticate(req: Request, res: Response, next: NextFunction) {
@@ -9,9 +10,9 @@ export function authenticate(req: Request, res: Response, next: NextFunction) {
 
   const token = parts[1];
   try {
-    const JWT_SECRET = process.env.JWT_SECRET || 'dev-secret-change-me';
-    const payload = jwt.verify(token, JWT_SECRET) as any;
-    (req as any).user = payload;
+    const JWT_SECRET = envs.JWT_SECRET!;
+    const payload = jwt.verify(token, JWT_SECRET);
+    req.body = payload;
     return next();
   } catch (err) {
     return res.status(401).json({ error: 'invalid token' });

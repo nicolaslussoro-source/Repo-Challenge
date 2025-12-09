@@ -32,6 +32,10 @@ Metrics endpoints (protected):
 Environment
 - Copy `.env.example` to `.env` and set `JWT_SECRET` for production.
 
+Postman
+- Import the included `postman_collection.json` into Postman to test all endpoints.
+- Alternatively, export requests from this API using Postman's collection export feature.
+
 Notes
 - Users are stored in a single MySQL `users` table (`id`, `name`, `email`, `password_hash`, `created_at`, `last_login`, `login_count`).
 - The server creates the `users` table automatically on startup if the database exists and credentials in `.env` are correct.

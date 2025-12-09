@@ -1,6 +1,6 @@
 import express from 'express';
-import authRouter from './routes/auth';
-import metricsRouter from './routes/metrics';
+import authRouter from './routes/auth.routes';
+import metricsRouter from './routes/metrics.routes';
 import { init as initDb } from './db';
 import { envs } from './config/env';
 
