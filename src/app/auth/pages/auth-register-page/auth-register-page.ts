@@ -1,6 +1,8 @@
 import { FormUtils } from './../../../utils/FormUtils';
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthService } from '../../service/auth-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth-register-page',
@@ -9,15 +11,22 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 
 })
 export class AuthRegisterPage {
+
+  authService = inject(AuthService);
   fb = inject(FormBuilder);
+  router = inject(Router)
+
+
   formUtils = FormUtils;
   submitMessage: string = '';
   submitError: string = '';
 
+  hasError = signal<boolean>(false);
+
 
   registerForm = this.fb.group({
-    username: ['', [Validators.required, FormUtils.fullNameValidator()]],
-    email: ['', [Validators.required, Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]],
+    name: ['', [Validators.required, FormUtils.fullNameValidator()]],
+    email: ['', [Validators.required, Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)], [this.authService.checkEmailValidator()]],
     password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/(?=.*\d)/)]],
     passwordConfirm: ['', [Validators.required]]
   },
@@ -47,7 +56,15 @@ export class AuthRegisterPage {
     }
 
     const formData = this.registerForm.value;
-    this.submitMessage = `¡Registro exitoso! Bienvenido ${formData.username}. Verifica tu correo en ${formData.email}`;
+    this.authService.register(formData).subscribe((isAuthenticated) => {
+      if (isAuthenticated) {
+        this.router.navigate(['/auth/dashboard']);
+      }
+
+      this.hasError.set(true);
+    });
+
+
     
   }
 

@@ -61,6 +61,12 @@
                            bg-sky-600 text-white hover:bg-sky-700 hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2">
                     Ingresar
                 </button>
+
+                @if (hasError()) {
+                    <div class="mt-4 text-red-600 text-center font-medium animate-fade-in duration-300">
+                        Credenciales inválidas. Por favor, intenta de nuevo.
+                    </div>
+                }
             </form>
 
             <div class="mt-6 text-center text-sm">

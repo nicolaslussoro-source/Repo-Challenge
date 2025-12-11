@@ -12,14 +12,14 @@
                         <label for="fullname" class="block text-sm font-bold text-gray-900 mb-2">
                             Nombre Completo
                         </label>
-                        <input type="text" id="fullname" formControlName="username" placeholder="Ej: Juan Pérez" required
+                        <input type="text" id="fullname" formControlName="name" placeholder="Ej: Juan Pérez" required
                             class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 transition-all duration-300
                             focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 focus:bg-white hover:border-gray-400">
-                        @if (formUtils.isFieldInvalid(registerForm, 'username')) {
+                        @if (formUtils.isFieldInvalid(registerForm, 'name')) {
                             <div class="text-red-600 text-sm mt-2 space-y-1 flex items-start gap-2">
                                 <span class="text-red-500 mt-0.5">⚠</span>
                                 <div class="flex-1">
-                                    @for (msg of formUtils.getFieldErrorMessages(registerForm, 'username'); track $index) {
+                                    @for (msg of formUtils.getFieldErrorMessages(registerForm, 'name'); track $index) {
                                         <div>{{ msg }}</div>
                                     }
                                 </div>
@@ -45,6 +45,7 @@
                                 </div>
                             </div>
                         }
+                        
                     </div>
 
                     <div class="group">
@@ -90,6 +91,12 @@
                         bg-sky-600 text-white hover:bg-sky-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2">
                         Registrarse
                     </button>
+
+                    @if (hasError()){
+                        <div class="mt-4 text-red-600 text-center font-medium animate-fade-in duration-300">
+                            Ocurrió un error inesperado al procesar tu registro. Por favor, inténtalo de nuevo más tarde
+                    </div>
+                    }
                 </form>
         </div>
     </div>

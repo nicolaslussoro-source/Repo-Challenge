@@ -1,18 +1,18 @@
 <div class="p-6 md:p-10 min-h-screen bg-gray-50 flex justify-center">
 
-    @if (isLoading()) {
+    @if (authService.authStatus() === 'checking') {
         <div class="text-gray-500 mt-20">Cargando datos del perfil...</div>
     }
 
-    @if (!isLoading() && user()) {
+    @if (authService.authStatus() === 'authenticated' && authService.user()) {
         <div class="w-full max-w-xl bg-white rounded-2xl shadow-xl border border-gray-100 p-6 sm:p-8">
             
             <div class="text-center mb-8 border-b pb-4">
                 <div class="w-20 h-20 mx-auto bg-sky-100 text-sky-600 rounded-full flex items-center justify-center text-3xl font-bold mb-3 border-4 border-sky-200">
-                    {{ user()!.name.charAt(0).toUpperCase() }}
+                    {{ authService.user()!.name.charAt(0).toUpperCase() }}
                 </div>
-                <h2 class="text-3xl font-extrabold text-gray-900">{{ user()!.name }}</h2>
-                <p class="text-sm text-gray-500">{{ user()!.email }}</p>
+                <h2 class="text-3xl font-extrabold text-gray-900">{{ authService.user()!.name }}</h2>
+                <p class="text-sm text-gray-500">{{ authService.user()!.email }}</p>
             </div>
 
             <div class="space-y-4">
@@ -21,19 +21,19 @@
 
                 <div class="flex justify-between items-center py-2 border-b border-gray-100">
                     <span class="text-sm font-medium text-gray-600">ID de Usuario:</span>
-                    <span class="text-sm font-semibold text-gray-900">{{ user()!.id }}</span>
+                    <span class="text-sm font-semibold text-gray-900">{{ authService.user()!.id }}</span>
                 </div>
 
                 <div class="flex justify-between items-center py-2 border-b border-gray-100">
                     <span class="text-sm font-medium text-gray-600">Miembro desde:</span>
-                    <span class="text-sm font-semibold text-gray-900">{{ user()!.created_at | date:'longDate' }}</span>
+                    <span class="text-sm font-semibold text-gray-900">{{ authService.user()!.created_at | date:'longDate' }}</span>
                 </div>
 
                 <div class="flex justify-between items-center py-2 border-b border-gray-100">
                     <span class="text-sm font-medium text-gray-600">Último Acceso:</span>
                     <span class="text-sm font-semibold text-gray-900">
-                        @if (user()!.last_login) {
-                            {{ user()!.last_login | date:'short' }}
+                        @if (authService.user()!.last_login) {
+                            {{ authService.user()!.last_login | date:'short' }}
                         } @else {
                             Nunca
                         }
@@ -42,7 +42,7 @@
 
                 <div class="flex justify-between items-center py-2 border-b border-gray-100">
                     <span class="text-sm font-medium text-gray-600">Inicios de Sesión Totales:</span>
-                    <span class="text-sm font-semibold text-sky-600">{{ user()!.login_count }}</span>
+                    <span class="text-sm font-semibold text-sky-600">{{ authService.user()!.login_count }}</span>
                 </div>
             </div>
 
@@ -51,10 +51,16 @@
                 Ver Dashboard de Métricas
             </button>
 
+            <button (click)="logout()"
+            class="mt-8 inline-block w-full text-center py-3 px-4 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition duration-300">
+                Cerrar Sesion
+            </button>
+
+
         </div>
     }
 
-    @if (!isLoading() && !user()) {
+    @if (!authService.user()) {
         <div class="text-center mt-20 p-8 bg-white rounded-lg shadow-md">
             <h3 class="text-xl font-bold text-red-600">Error</h3>
             <p class="text-gray-600">No se pudieron cargar los datos del usuario. Por favor, intenta iniciar sesión de nuevo.</p>

@@ -55,6 +55,9 @@ export class FormUtils {
         if (errors['email']) {
             messages.push('Por favor ingresa un correo válido');
         }
+        if(errors['emailTaken']){
+            messages.push('Este correo electronico ya ha sido registrado')
+        }
         if (errors['minlength']) {
             const requiredLength = errors['minlength'].requiredLength;
             messages.push(`Mínimo ${requiredLength} caracteres`);
@@ -73,6 +76,7 @@ export class FormUtils {
         if (errors['passwordMismatch']) {
             messages.push('Las contraseñas no coinciden');
         }
+
 
         return messages;
     }
