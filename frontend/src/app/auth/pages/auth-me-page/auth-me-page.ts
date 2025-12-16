@@ -1,3 +1,4 @@
+import { ProfileAvatar } from './../../components/profile-avatar/profile-avatar';
 import { AuthService } from './../../service/auth-service';
 import { DatePipe } from '@angular/common';
 import { User } from './../../../shared/interfaces/User.interface';
@@ -7,7 +8,7 @@ import { Router, RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-auth-me-page',
-  imports: [DatePipe], 
+  imports: [DatePipe, ProfileAvatar], 
   templateUrl: './auth-me-page.html',
 })
 export class AuthMePage {
